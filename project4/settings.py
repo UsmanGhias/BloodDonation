@@ -11,6 +11,7 @@ import os
 import random
 import string
 import secrets
+import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -78,16 +79,15 @@ WSGI_APPLICATION = 'project4.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pos',
-        'USER': 'postgres',
-        'PASSWORD':'46730820Hangb',
-        'HOST':'127.0.0.1',
-        'POST':'5432',
-
+        'PASSWORD': '46730820Hangb',
+        'HOST': '127.0.0.1',
+        'POST': '5432',
+        'POST': '5432',
     }
 }
 
