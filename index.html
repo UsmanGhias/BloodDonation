@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloodDonation - Usman Ghias</title>
+  <meta name="description" content="BloodDonation built with Django for web application use cases.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-card: #111827;
+      --bg-card-hover: #1f2937;
+      --border-subtle: #1e293b;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --code-bg: #030712;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.65;
+      font-size: 16px;
+      padding-bottom: 60px;
+    }
+    header.site-header {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-logo {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .header-logo span {
+      color: var(--accent);
+    }
+    .header-links {
+      display: flex;
+      gap: 16px;
+    }
+    .header-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .header-links a:hover {
+      color: var(--text-main);
+    }
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 36px 24px;
+    }
+    .hero {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 32px;
+      margin-bottom: 36px;
+    }
+    .meta-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .badge.lang {
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.08);
+    }
+    .badge.type {
+      color: #a78bfa;
+      border-color: rgba(167, 139, 250, 0.3);
+      background: rgba(167, 139, 250, 0.08);
+    }
+    h1.project-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    p.project-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #090d16;
+    }
+    .btn-primary:hover {
+      background: #7dd3fc;
+    }
+    .btn-secondary {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: #334155;
+    }
+    .content-area {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 36px 40px;
+    }
+    .content-area h1, .content-area h2, .content-area h3, .content-area h4 {
+      color: #ffffff;
+      margin-top: 1.8rem;
+      margin-bottom: 0.9rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .content-area h1 { font-size: 1.6rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; }
+    .content-area h2 { font-size: 1.35rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px; }
+    .content-area h3 { font-size: 1.15rem; }
+    .content-area p {
+      margin-bottom: 1.1rem;
+      color: #d1d5db;
+    }
+    .content-area ul, .content-area ol {
+      margin-bottom: 1.2rem;
+      padding-left: 24px;
+      color: #d1d5db;
+    }
+    .content-area li {
+      margin-bottom: 6px;
+    }
+    .content-area pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      margin-bottom: 1.4rem;
+    }
+    .content-area code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #7dd3fc;
+    }
+    .content-area pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      color: #e5e7eb;
+    }
+    .content-area blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+      margin: 1.2rem 0;
+      color: #9ca3af;
+      font-style: italic;
+    }
+    .content-area table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.4rem;
+    }
+    .content-area th, .content-area td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+    .content-area th {
+      background: #1f2937;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .content-area img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      margin: 12px 0;
+    }
+    footer.site-footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    footer.site-footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer.site-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https://usmanghias.github.io/Portfolio/" class="header-logo">Usman <span>Ghias</span></a>
+      <div class="header-links">
+        <a href="https://github.com/UsmanGhias/BloodDonation" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://usmanghias.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+        <a href="https://codcrafters.org" target="_blank" rel="noopener">CODCrafters</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="meta-badges">
+        <span class="badge lang">Python</span>
+        <span class="badge ">Open Source</span>
+        <span class="badge">★ 1 Stars</span>
+        <span class="badge">Branch: main</span>
+      </div>
+      <h1 class="project-title">BloodDonation</h1>
+      <p class="project-desc">BloodDonation built with Django for web application use cases.</p>
+      <div class="hero-actions">
+        <a href="https://github.com/UsmanGhias/BloodDonation" class="btn btn-primary" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="https://github.com/UsmanGhias/BloodDonation/issues" class="btn btn-secondary" target="_blank" rel="noopener">Issues & Feedback</a>
+      </div>
+    </section>
+
+    <article class="content-area">
+      <h1 id="blooddonation">BloodDonation</h1>
+<p>BloodDonation built with Django for web application use cases.</p>
+<h2 id="overview">Overview</h2>
+<p>This open-source repository provides source code, configurations, and implementation details for <strong>BloodDonation</strong>.</p>
+<h2 id="technology-stack">Technology Stack</h2>
+<ul>
+<li>Primary Language: <code>Python</code></li>
+<li>Architecture: Standard modular open-source implementation</li>
+<li>Author: Usman Ghias (CODCrafters)</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<p>To clone and explore the project locally:</p>
+<pre><code class="language-bash">git clone https://github.com/UsmanGhias/BloodDonation.git
+cd BloodDonation
+</code></pre>
+    </article>
+
+    <footer class="site-footer">
+      <p>Project documentation maintained by <a href="https://github.com/UsmanGhias">Usman Ghias</a>, Founder & Lead Architect at <a href="https://codcrafters.org">CODCrafters</a>.</p>
+    </footer>
+  </main>
+</body>
+</html>
